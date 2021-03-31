@@ -174,8 +174,9 @@ void FlutterSecureStorageWindowsPlugin::HandleMethodCall(
 
       ifstream myfile(path / key);
       if (myfile.is_open()) {
-          string line;
-          getline(myfile, line);
+          std::ostringstream sstr;
+          sstr << myfile.rdbuf();
+          string line = sstr.str();
           myfile.close();
 
           /*
